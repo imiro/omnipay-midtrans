@@ -1,5 +1,5 @@
 {
-    "name": "dilab/omnipay-midtrans",
+    "name": "imiro/omnipay-midtrans",
     "description": "Midtrans gateway for Omnipay payment processing library",
     "keywords": [
         "gateway",
@@ -21,7 +21,7 @@
         "php-http/guzzle6-adapter": "^1.1"
     },
     "require-dev": {
-        "omnipay/tests": "3.0-beta.1"
+        "omnipay/tests": "~3"
     },
     "autoload": {
         "psr-4": { "Omnipay\\Midtrans\\" : "src/" }
