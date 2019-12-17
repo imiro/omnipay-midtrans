@@ -22,6 +22,10 @@ use Omnipay\Common\AbstractGateway;
  */
 class SnapWindowRedirectionGateway extends AbstractGateway
 {
+
+    private $notificationOverrideUrls = NULL;
+    private $notificationAppendUrls = NULL;
+
     public function getName()
     {
         return 'Midtrans Snap Window Redirection';
@@ -53,5 +57,24 @@ class SnapWindowRedirectionGateway extends AbstractGateway
     {
         return $this->createRequest('\Omnipay\Midtrans\Message\SnapWindowRedirectionCompletePurchaseRequest', $parameters);
     }
+
+    // custom notification URL
+
+    public function setNotificationOverrideURL($urls)
+    {
+        if( is_array($urls) )
+          $urls = implode($urls, ",");
+
+        $this->notificationOverrideUrls = $urls;
+    }
+
+    public function setNotificationAppendURL($urls)
+    {
+        if( is_array($urls) )
+          $urls = implode($urls, ",");
+
+        $this->notificationAppendUrls = $urls;
+    }
+
 
 }
