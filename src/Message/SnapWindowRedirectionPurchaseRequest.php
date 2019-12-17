@@ -66,11 +66,19 @@ class SnapWindowRedirectionPurchaseRequest extends AbstractRequest
 
     protected function getSendDataHeader()
     {
-        return [
+        $ret = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
             'Authorization' => 'Basic ' . base64_encode($this->getServerKey() . ':')
         ];
+
+        if( !is_null( $this->notificationAppendUrls ) )
+          $ret['X-Append-Notification'] = $this->notificationAppendUrls;
+
+        if( !is_null( $this->notificationOverrideUrls ) )
+          $ret['X-Override-Notification'] = $this->notificationOverrideUrls;
+
+        return $ret;
     }
 
     /**
