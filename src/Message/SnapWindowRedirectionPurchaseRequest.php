@@ -11,6 +11,19 @@ class SnapWindowRedirectionPurchaseRequest extends AbstractRequest
     const MIN_AMOUNT = 10000;
     const MAX_LENGTH_TRANSACTION_ID = 50;
 
+    private $notificationOverrideUrls = NULL;
+    private $notificationAppendUrls = NULL;
+
+    public function setNotificationOverrideURL($urls)
+    {
+        $this->notificationOverrideUrls = $urls;
+    }
+
+    public function setNotificationAppendURL($urls)
+    {
+        $this->notificationAppendUrls = $urls;
+    }
+
     public function sendData($data)
     {
         $responseData = $this->httpClient
