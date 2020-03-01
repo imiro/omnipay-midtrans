@@ -74,6 +74,12 @@ class SnapWindowRedirectionPurchaseRequest extends AbstractRequest
             ];
         }
 
+        if($this->getReturnUrl()) {
+          $result['callbacks'] = [
+            'finish' => $this->getReturnUrl()
+          ];
+        }
+
         return $result;
     }
 
