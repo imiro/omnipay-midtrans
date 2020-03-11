@@ -50,36 +50,12 @@ class SnapWindowRedirectionGateway extends AbstractGateway
 
     public function purchase(array $parameters = array())
     {
-        $request = $this->createRequest('\Omnipay\Midtrans\Message\SnapWindowRedirectionPurchaseRequest', $parameters);
-
-        $request->setNotificationOverrideURL( $this->notificationOverrideUrls );
-        $request->setNotificationAppendURL( $this->notificationAppendUrls );
-
-        return $request;
+        return $this->createRequest('\Omnipay\Midtrans\Message\SnapWindowRedirectionPurchaseRequest', $parameters);
     }
 
     public function completePurchase(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\Midtrans\Message\SnapWindowRedirectionCompletePurchaseRequest', $parameters);
     }
-
-    // custom notification URL
-
-    public function setNotificationOverrideURL($urls)
-    {
-        if( is_array($urls) )
-          $urls = implode($urls, ",");
-
-        $this->notificationOverrideUrls = $urls;
-    }
-
-    public function setNotificationAppendURL($urls)
-    {
-        if( is_array($urls) )
-          $urls = implode($urls, ",");
-
-        $this->notificationAppendUrls = $urls;
-    }
-
 
 }

@@ -11,19 +11,6 @@ class SnapWindowRedirectionPurchaseRequest extends AbstractRequest
     const MIN_AMOUNT = 10000;
     const MAX_LENGTH_TRANSACTION_ID = 50;
 
-    private $notificationOverrideUrls = NULL;
-    private $notificationAppendUrls = NULL;
-
-    public function setNotificationOverrideURL($urls)
-    {
-        $this->notificationOverrideUrls = $urls;
-    }
-
-    public function setNotificationAppendURL($urls)
-    {
-        $this->notificationAppendUrls = $urls;
-    }
-
     public function sendData($data)
     {
         $responseData = $this->httpClient
@@ -91,13 +78,35 @@ class SnapWindowRedirectionPurchaseRequest extends AbstractRequest
             'Authorization' => 'Basic ' . base64_encode($this->getServerKey() . ':')
         ];
 
-        if( !is_null( $this->notificationAppendUrls ) )
-          $ret['X-Append-Notification'] = $this->notificationAppendUrls;
+        if( $this->getNotifyUrl() )
+          $ret['X-Append-Notification'] = $this->getNotifyUrl();
 
-        if( !is_null( $this->notificationOverrideUrls ) )
-          $ret['X-Override-Notification'] = $this->notificationOverrideUrls;
+        if( $this->getNotifyOverrideUrl() )
+          $ret['X-Override-Notification'] = $this->getNotifyOverrideUrl();
 
         return $ret;
+    }
+
+    /***** Set- and getters for "notifyOverrideUrl" *****/
+    /**
+     * Get the request notification override URL.
+     *
+     * @return string
+     */
+    public function getNotifyOverrideUrl()
+    {
+        return $this->getParameter('notifyOverrideUrl');
+    }
+
+    /**
+     * Sets the request notification override URL.
+     *
+     * @param string $value
+     * @return $this
+     */
+    public function setNotifyOverrideUrl($value)
+    {
+        return $this->setParameter('notifyOverrideUrl', $value);
     }
 
     /**
